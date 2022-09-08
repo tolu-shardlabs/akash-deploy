@@ -24,11 +24,11 @@ PATH="$PATH"
 node -v
 npm -v
 sudo npm install -g near-cli
-export NEAR_ENV=shardnet
-echo 'export NEAR_ENV=shardnet' >> ~/.bashrc
+export NEAR_ENV=testnet
+echo 'export NEAR_ENV=' >> ~/.bashrc
 near proposals
 
-echo  ===================near установлен ===================
+echo  ===================Installing near dependencies ===================
 
 sleep 10
 sudo apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm cargo
@@ -42,37 +42,33 @@ rustup update stable
 source $HOME/.cargo/env
 sleep 20
 cd /root/
-git clone "https://github.com/near/nearcore"
+wget -c https://github.com/near/nearcore/archive/refs/tags/1.29.0-rc.1.zip
 sleep 5
-commit=`curl -s https://raw.githubusercontent.com/near/stakewars-iii/main/commit.md`
+unzip`1.29.0-rc.1.zip
+mv 1.29.0-rc.1 nearcore
 cd nearcore
-git fetch
-git checkout $commit
-echo  ================= Начинаю сборку ==================
 echo  =================== Start build ===================
 sleep 5
 cargo build -p neard --release --features shardnet
 cp /root/nearcore/target/release/neard /usr/bin/
 cd /root/
-echo  =================== Завершена сборка ====================
-echo  =================== Build s completed ===================
-neard init --chain-id shardnet --download-genesis
+echo  =================== Build  completed ===================
+neard init --chain-id testnet --download-genesis
 ls /root/ -a 
 ls /root/.near -a 
 ls / -a 
-echo  ======================= nearcore установлен =====================
 echo  =================== install nearcore complete ===================
 sleep 10
 cd .near
 rm config.json
-wget -O /root/.near/config.json "https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/config.json"
+wget -O /root/.near/config.json "https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/testnet/config.json"
 sleep 5
 sudo apt-get install awscli -y
 pwd
 sleep 10
 cd /root/.near/
 rm /root/.near/genesis.json
-wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/genesis.json
+wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/testnet/genesis.json
 sleep 10
 cd /root/.near/
 pip3 install awscli --upgrade
@@ -84,12 +80,10 @@ tail -200 /var/log/$binary/current
 echo ====================================================================================================
 echo ====== validator_key.json not found, please create and completed of registration your account ======
 echo ====================================================================================================
-echo ==== validator_key.json не обнаружен, пожалуйста создайте и завершите регистрацию вашего аккаунта ==
-echo ====================================================================================================
+
+
 echo ===================================================================================================================================
 echo ===== Refer to instructions to address https://github.com/Dimokus88/near/blob/main/Guide_EN.md#create-and-register-a-validator ====
-echo ===================================================================================================================================
-echo === Обратитесь к инструкции по адресу https://github.com/Dimokus88/near/blob/main/Guide_RU.md#создаем-и-регистрируем-валидатора ===
 echo ===================================================================================================================================
 sleep infinity
 fi
@@ -128,7 +122,7 @@ ln -s /root/$binary /etc/service
 sleep 20
 tail -200 /var/log/$binary/current
 sleep 20
-#===========================================================
+
 while [[ "$t" -eq 1 ]]
 do
 tail -200 /var/log/$binary/current
