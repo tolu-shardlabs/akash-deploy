@@ -59,7 +59,7 @@ ls /root/.near -a
 ls / -a 
 echo  =================== install nearcore complete ===================
 sleep 10
-cd .near
+mkdir .near
 rm config.json
 wget -O /root/.near/config.json "https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/testnet/config.json"
 sleep 5
