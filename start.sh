@@ -55,7 +55,6 @@ cd /root/
 echo  =================== Build  completed ===================
 neard init --chain-id testnet --download-genesis
 ls /root/ -a 
-ls /root/.near -a 
 ls / -a 
 echo  =================== install nearcore complete ===================
 sleep 10
