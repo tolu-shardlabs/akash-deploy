@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 (echo {my_root_password}) | passwd root
+echo "password-created"
 service ssh restart
 runsvdir -P /etc/service &
 nodepid=0
@@ -71,7 +72,6 @@ wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/t
 sleep 10
 cd /root/.near/
 pip3 install awscli --upgrade
-echo все ОК
 sleep 20
 if  [[  -z $link_key  ]]
 then
