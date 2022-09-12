@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-(echo {my_root_password}) | passwd root
-echo "password-created"
+(echo ${my_root_password}; echo ${my_root_password}) | passwd root
+echo "Password-created"
 service ssh restart
 runsvdir -P /etc/service &
 nodepid=0
