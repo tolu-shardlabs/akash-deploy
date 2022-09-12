@@ -50,7 +50,8 @@ mv 1.29.0-rc.1 nearcore
 cd nearcore
 echo  =================== Start build ===================
 sleep 5
-cd nearcore && cargo build -p neard --release --features shardnet
+cd nearcore  
+cargo build -p neard --release --features shardnet
 cp /root/nearcore/target/release/neard /usr/bin/
 cd /root/
 echo  =================== Build  completed ===================
