@@ -45,7 +45,8 @@ sleep 20
 cd /root/
 wget -c https://github.com/near/nearcore/archive/refs/tags/1.29.0-rc.1.zip
 sleep 5
-unzip 1.29.0-rc.1.zip && mv 1.29.0-rc.1 nearcore
+unzip 1.29.0-rc.1.zip  
+mv 1.29.0-rc.1 nearcore
 cd nearcore
 echo  =================== Start build ===================
 sleep 5
